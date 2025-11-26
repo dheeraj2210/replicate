@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
 import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
   FaWhatsapp,
