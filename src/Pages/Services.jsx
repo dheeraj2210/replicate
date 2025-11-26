@@ -64,7 +64,7 @@ const Services = () => {
       icon: FaWind,
       title: "Refrigerator Gas Filling",
       description: "Accurate refrigerant refill for efficient cooling",
-      features: ["R134a & R600a gas", "Leak detection", "Pressure testing", "Certified refrigerant"],
+      features: ["R134a & R600a Gas", "Leak detection", "Pressure testing", "Certified refrigerant"],
     },
     {
       icon: GrVmMaintenance,
