@@ -1,3 +1,4 @@
+// src/components/Filter.jsx
 import React from "react";
 import { CiFilter } from "react-icons/ci";
 
@@ -81,8 +82,6 @@ const Filter = ({ setBrand, setCapacity, setAcType }) => {
               onChange={(e) => setCapacity(e.target.value)}
             >
               <option value="">All Capacities</option>
-
-              {/* Must match exactly with your product.capacity values */}
 
               {/* AC (Tons) */}
               <optgroup label="AC (Tons)">

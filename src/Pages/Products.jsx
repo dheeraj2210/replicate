@@ -1,6 +1,7 @@
+// src/Pages/Products.jsx
 import React, { useState, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import Filter from "../filter/Filter";
+import Filter from "../filter/Filter";      // 👈 tumhara hi path
 import Hero from "../components/Hero";
 
 const Products = () => {
@@ -342,14 +343,12 @@ const Products = () => {
   const firstPageCount = isLarge ? 8 : 6;
   const otherPageCount = 8;
 
-  // Resize listener (this is fine – syncing with window)
   useEffect(() => {
     const onResize = () => setIsLarge(window.innerWidth >= 1024);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Filter products
   const filteredProducts = allProducts.filter((item) => {
     return (
       (selectedBrand ? item.brand === selectedBrand : true) &&
@@ -366,7 +365,6 @@ const Products = () => {
       : 0;
   const totalPages = totalItems === 0 ? 1 : 1 + extraPages;
 
-  // Clamp page WITHOUT effects
   const clampPage = (page) => {
     if (totalPages <= 0) return 1;
     return Math.min(Math.max(page, 1), totalPages);
@@ -374,7 +372,6 @@ const Products = () => {
 
   const page = clampPage(currentPage);
 
-  // Slice indices based on safe page
   let startIdx = 0;
   let endIdx = 0;
   if (page === 1) {
@@ -388,7 +385,6 @@ const Products = () => {
 
   const paginatedProducts = filteredProducts.slice(startIdx, endIdx);
 
-  // Pagination handlers
   const goToPage = (n) => setCurrentPage(clampPage(n));
   const prevPage = () => setCurrentPage((p) => clampPage(p - 1));
   const nextPage = () => setCurrentPage((p) => clampPage(p + 1));
@@ -396,17 +392,15 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-gray-50 mb-5 ">
       <Hero
-        title={"Shop AC Units & Refrigerators"}
-        subtitle={
-          "Browse our collection of premium air conditioners and refrigerators from top brands."
-        }
+        title="Shop AC Units & Refrigerators"
+        subtitle="Browse our collection of premium air conditioners and refrigerators from top brands."
       />
 
       <div className="max-w-7xl mx-auto px-4">
         <Filter
           setBrand={(value) => {
             setSelectedBrand(value);
-            setCurrentPage(1); // reset here instead of useEffect
+            setCurrentPage(1);
           }}
           setCapacity={(value) => {
             setSelectedCapacity(value);
