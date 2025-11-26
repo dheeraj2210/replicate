@@ -1,6 +1,6 @@
 import React from "react";
 import { FaAward, FaUsers, FaBriefcase, FaClock } from "react-icons/fa";
-import ServicePartners from "../components/ServicePartners";
+import ServicePartners from "../components/ServicePartners"
 import Hero from "../components/Hero";
 import WhyChooseRadheAir from "../components/WhyChooseRadheAir";
 
