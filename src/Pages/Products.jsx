@@ -340,14 +340,16 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const firstPageCount = isLarge ? 8 : 6;
-  const otherPageCount = 8; // show 8 refrigerators on second page
+  const otherPageCount = 8;
 
+  // Resize listener (this is fine – syncing with window)
   useEffect(() => {
     const onResize = () => setIsLarge(window.innerWidth >= 1024);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  // Filter products
   const filteredProducts = allProducts.filter((item) => {
     return (
       (selectedBrand ? item.brand === selectedBrand : true) &&
@@ -356,40 +358,40 @@ const Products = () => {
     );
   });
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedBrand, selectedCapacity, selectedType]);
-
   const totalItems = filteredProducts.length;
-
   const remainingAfterFirst = Math.max(0, totalItems - firstPageCount);
   const extraPages =
     remainingAfterFirst > 0
       ? Math.ceil(remainingAfterFirst / otherPageCount)
       : 0;
-  const totalPages = 1 + extraPages;
+  const totalPages = totalItems === 0 ? 1 : 1 + extraPages;
 
-  useEffect(() => {
-    if (currentPage > totalPages) setCurrentPage(totalPages);
-    if (currentPage < 1) setCurrentPage(1);
-  }, [currentPage, totalPages]);
+  // Clamp page WITHOUT effects
+  const clampPage = (page) => {
+    if (totalPages <= 0) return 1;
+    return Math.min(Math.max(page, 1), totalPages);
+  };
 
+  const page = clampPage(currentPage);
+
+  // Slice indices based on safe page
   let startIdx = 0;
   let endIdx = 0;
-  if (currentPage === 1) {
+  if (page === 1) {
     startIdx = 0;
     endIdx = Math.min(firstPageCount, totalItems);
   } else {
-    const offset = firstPageCount + (currentPage - 2) * otherPageCount;
+    const offset = firstPageCount + (page - 2) * otherPageCount;
     startIdx = offset;
     endIdx = Math.min(offset + otherPageCount, totalItems);
   }
 
   const paginatedProducts = filteredProducts.slice(startIdx, endIdx);
 
-  const goToPage = (n) => setCurrentPage(n);
-  const prevPage = () => setCurrentPage((p) => Math.max(1, p - 1));
-  const nextPage = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
+  // Pagination handlers
+  const goToPage = (n) => setCurrentPage(clampPage(n));
+  const prevPage = () => setCurrentPage((p) => clampPage(p - 1));
+  const nextPage = () => setCurrentPage((p) => clampPage(p + 1));
 
   return (
     <div className="min-h-screen bg-gray-50 mb-5 ">
@@ -402,9 +404,18 @@ const Products = () => {
 
       <div className="max-w-7xl mx-auto px-4">
         <Filter
-          setBrand={setSelectedBrand}
-          setCapacity={setSelectedCapacity}
-          setAcType={setSelectedType}
+          setBrand={(value) => {
+            setSelectedBrand(value);
+            setCurrentPage(1); // reset here instead of useEffect
+          }}
+          setCapacity={(value) => {
+            setSelectedCapacity(value);
+            setCurrentPage(1);
+          }}
+          setAcType={(value) => {
+            setSelectedType(value);
+            setCurrentPage(1);
+          }}
         />
 
         <hr className="my-6 border-gray-200" />
@@ -450,7 +461,7 @@ const Products = () => {
                     {item.brand}
                   </span>
 
-                <div className="text-right">
+                  <div className="text-right">
                     <p className="text-sm font-bold text-gray-800">
                       {item.brand} {item.model}
                     </p>
@@ -516,6 +527,7 @@ const Products = () => {
                 setSelectedBrand("");
                 setSelectedCapacity("");
                 setSelectedType("");
+                setCurrentPage(1);
               }}
               className="mt-4 inline-block px-4 py-2 rounded-md border border-[#1f71b4] text-[#1f71b4] font-semibold"
             >
@@ -535,7 +547,7 @@ const Products = () => {
             <nav className="flex items-center gap-2" aria-label="Pagination">
               <button
                 onClick={prevPage}
-                disabled={currentPage === 1}
+                disabled={page === 1}
                 className="px-3 py-1 rounded-md border disabled:opacity-50"
               >
                 Prev
@@ -548,9 +560,9 @@ const Products = () => {
                       key={n}
                       onClick={() => goToPage(n)}
                       className={`px-3 py-1 rounded-md border ${
-                        n === currentPage ? "bg-[#1f71b4] text-white" : ""
+                        n === page ? "bg-[#1f71b4] text-white" : ""
                       }`}
-                      aria-current={n === currentPage ? "page" : undefined}
+                      aria-current={n === page ? "page" : undefined}
                     >
                       {n}
                     </button>
@@ -560,7 +572,7 @@ const Products = () => {
 
               <button
                 onClick={nextPage}
-                disabled={currentPage === totalPages}
+                disabled={page === totalPages}
                 className="px-3 py-1 rounded-md border disabled:opacity-50"
               >
                 Next
