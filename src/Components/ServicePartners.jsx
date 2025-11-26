@@ -1,4 +1,4 @@
-
+// src/components/ServicePartners.jsx
 import React from "react";
 
 const brands = [
@@ -22,8 +22,12 @@ export default function ServicePartners() {
   return (
     <section className="py-12 bg-slate-50">
       <div className="container mx-auto px-4">
-        <h4 className="text-center text-2xl font-bold mb-4">Authorized Service Partners</h4>
-        <p className="text-center text-slate-600 mb-6">Premium AC brands we support</p>
+        <h4 className="text-center text-2xl font-bold mb-4">
+          Authorized Service Partners
+        </h4>
+        <p className="text-center text-slate-600 mb-6">
+          Premium AC brands we support
+        </p>
 
         <style>{`
           .marquee-wrap { overflow: hidden; position: relative; }
@@ -45,18 +49,25 @@ export default function ServicePartners() {
                   className="bg-white shadow-md flex items-center justify-center p-5 transition-transform duration-300 hover:scale-110 rounded-4xl"
                   style={{ height: "110px", width: "140px" }}
                 >
-                  <img src={b.logo} alt={b.name} className="h-20 w-auto object-contain" />
+                  <img
+                    src={b.logo}
+                    alt={b.name}
+                    className="h-20 w-auto object-contain"
+                  />
                 </div>
               ))}
 
-              {/* duplicate for infinite scroll */}
               {brands.map((b, i) => (
                 <div
                   key={`copy-${i}`}
                   className="bg-white shadow-md flex items-center justify-center p-5 transition-transform duration-300 hover:scale-110 rounded-4xl"
                   style={{ height: "110px", width: "140px" }}
                 >
-                  <img src={b.logo} alt={`${b.name}-copy`} className="h-20 w-auto object-contain" />
+                  <img
+                    src={b.logo}
+                    alt={`${b.name}-copy`}
+                    className="h-20 w-auto object-contain"
+                  />
                 </div>
               ))}
             </div>
