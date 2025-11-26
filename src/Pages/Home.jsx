@@ -31,7 +31,7 @@ const Home = () => {
     { Icon: FiTool, title: "AC Repair", desc: "Expert diagnosis and repair" },
     { Icon: FiBox, title: "Installation", desc: "Professional setup" },
     { Icon: FiWind, title: "Gas Filling", desc: "Quick refill service" },
-    { Icon: FiShield, title: "AMC Plans", desc: "Annual maintenance" },
+    { Icon: FiShield, title: "AMC Plans", desc: "Annual Maintenance" },
   ];
 
   const products = [
