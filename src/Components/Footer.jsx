@@ -158,8 +158,9 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-sm text-center w-full ">
             &copy; {new Date().getFullYear()} <a href="/">YardAir</a>. All rights reserved. 
+            <br />
             Made by <a 
-                        className="text-green-400"
+                        className="text-blue-500"
                         href="https://www.bimfrox.com/">BIMFROX</a>
           </p>
         </div>
