@@ -1,3 +1,4 @@
+// src/Pages/Services.jsx
 import React from "react";
 import {
   FaWrench,
@@ -11,6 +12,7 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { GrVmMaintenance } from "react-icons/gr";
+
 import Hero from "../components/Hero";
 import WhyChooseRadheAir from "../components/WhyChooseRadheAir";
 
@@ -22,55 +24,101 @@ const Services = () => {
       icon: FaWrench,
       title: "AC Repair & Service",
       description: "Complete diagnosis and repair of all AC problems",
-      features: ["Expert technicians", "Same day service", "90-day warranty", "Free inspection"],
+      features: [
+        "Expert technicians",
+        "Same day service",
+        "90-day warranty",
+        "Free inspection",
+      ],
     },
     {
       icon: FaBox,
       title: "AC Installation",
       description: "Professional installation for all AC types",
-      features: ["Standard & split AC", "Pipe & wiring included", "Proper positioning", "1-year warranty"],
+      features: [
+        "Standard & split AC",
+        "Pipe & wiring included",
+        "Proper positioning",
+        "1-year warranty",
+      ],
     },
     {
       icon: FaWind,
       title: "Gas Filling",
       description: "Quick refrigerant refill for optimal cooling",
-      features: ["R22 & R410A gas", "Leak detection", "Pressure testing", "Certified gas"],
+      features: [
+        "R22 & R410A gas",
+        "Leak detection",
+        "Pressure testing",
+        "Certified gas",
+      ],
     },
     {
       icon: FaShieldAlt,
       title: "AMC Plans",
       description: "Annual maintenance contracts for hassle-free service",
-      features: ["4 free services/year", "Priority support", "Discount on repairs", "Gas top-up included"],
+      features: [
+        "4 free services/year",
+        "Priority support",
+        "Discount on repairs",
+        "Gas top-up included",
+      ],
     },
     {
       icon: FaTint,
       title: "Deep Cleaning",
       description: "Thorough cleaning of AC units for better performance",
-      features: ["Filter cleaning", "Coil deep wash", "Drain pipe cleaning", "Anti-bacterial spray"],
+      features: [
+        "Filter cleaning",
+        "Coil deep wash",
+        "Drain pipe cleaning",
+        "Anti-bacterial spray",
+      ],
     },
     {
       icon: FaBolt,
       title: "PCB Repair",
       description: "Circuit board repair and replacement",
-      features: ["Expert diagnosis", "Genuine parts", "Quick turnaround", "6-month warranty"],
+      features: [
+        "Expert diagnosis",
+        "Genuine parts",
+        "Quick turnaround",
+        "6-month warranty",
+      ],
     },
     {
       icon: FaWrench,
       title: "Refrigerator Repair",
-      description: "Complete repair for single-door, double-door & side-by-side fridges",
-      features: ["Cooling issue fix", "Compressor check", "Thermostat repair", "Water leakage fix"],
+      description:
+        "Complete repair for single-door, double-door & side-by-side fridges",
+      features: [
+        "Cooling issue fix",
+        "Compressor check",
+        "Thermostat repair",
+        "Water leakage fix",
+      ],
     },
     {
       icon: FaWind,
       title: "Refrigerator Gas Filling",
       description: "Accurate refrigerant refill for efficient cooling",
-      features: ["R134a & R600a Gas", "Leak detection", "Pressure testing", "Certified refrigerant"],
+      features: [
+        "R134a & R600a Gas",
+        "Leak detection",
+        "Pressure testing",
+        "Certified refrigerant",
+      ],
     },
     {
       icon: GrVmMaintenance,
       title: "Refrigerator Maintenance",
       description: "Regular servicing to enhance refrigerator life",
-      features: ["Condenser cleaning", "Thermostat calibration", "Door gasket check", "Full system inspection"],
+      features: [
+        "Condenser cleaning",
+        "Thermostat calibration",
+        "Door gasket check",
+        "Full system inspection",
+      ],
     },
   ];
 
@@ -104,14 +152,20 @@ const Services = () => {
                   <div className="p-6 flex gap-4">
                     <div
                       className="flex items-center justify-center h-14 w-14 rounded-lg shrink-0"
-                      style={{ background: `linear-gradient(135deg, ${PRIMARY}, #38bdf8)` }}
+                      style={{
+                        background: `linear-gradient(135deg, ${PRIMARY}, #38bdf8)`,
+                      }}
                     >
                       <Icon className="h-6 w-6 text-white" />
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold leading-tight">{service.title}</h3>
-                      <p className="text-xs text-gray-500 mt-1">{service.description}</p>
+                      <h3 className="text-lg font-semibold leading-tight">
+                        {service.title}
+                      </h3>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {service.description}
+                      </p>
 
                       <div
                         className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium"
@@ -127,7 +181,10 @@ const Services = () => {
                     <ul className="mb-4 grid gap-2 text-sm text-gray-600">
                       {service.features.map((f, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <FaCheckCircle className="mt-1 h-4 w-4" style={{ color: PRIMARY }} />
+                          <FaCheckCircle
+                            className="mt-1 h-4 w-4"
+                            style={{ color: PRIMARY }}
+                          />
                           <span>{f}</span>
                         </li>
                       ))}
